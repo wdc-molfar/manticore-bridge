@@ -1,2 +1,2 @@
-# manticore-bridg
+# manticore-bridge
  
