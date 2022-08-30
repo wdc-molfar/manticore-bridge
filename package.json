@@ -13,6 +13,7 @@
   "author": "mr_sobol",
   "license": "ISC",
   "dependencies": {
+    "lodash": "^4.17.21",
     "manticoresearch": "^3.1.0"
   },
   "devDependencies": {
@@ -37,8 +38,8 @@
         "./node_modules/jest-html-reporters",
         {
           "publicPath": "./docs/.vuepress/public/testReport",
-          "filename": "test-report.html",
-          "pageTitle": "@molfar/service-manti"
+          "filename": "index.html",
+          "pageTitle": "@molfar/manticore-bridge"
         }
       ]
     ]
