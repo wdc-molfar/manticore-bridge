@@ -18,9 +18,9 @@
   },
   "devDependencies": {
     "supertest": "^6.1.6",
-    "jest": "^27.5.1",
+    "jest": "^29.0.1",
     "jest-cli": "^28.1.1",
-    "jest-html-reporters": "^2.1.6",
+    "jest-html-reporters": "^3.0.10",
     "jest-openapi": "^0.14.2",
     "jest-stare": "^2.4.1"
   },

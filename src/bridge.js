@@ -41,7 +41,7 @@ const execute = async (query, param) => {
 
 const stringify = object => {
     let result = JSON.stringify(object)
-    result.replace(/\"/g, "`")
+    result = result.replaceAll( /'/ig, "`")
     return result
 }
 
