@@ -1,4 +1,10 @@
-const { getClient, execute } = require("./index.js")
+const { getClient, execute, formatter } = require("./index.js")
+const data = require('./test/data')
+
+formatter(data)
+
+// for testing
+// console.log(data.service.scraper.message)
 
 let client = getClient("http://10.6.12.86:9308")
 

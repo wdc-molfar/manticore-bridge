@@ -20,7 +20,24 @@ const getClient = url => {
     return client[url]
 }
 
-
+/** Функція, що дозволяє обійти json структуру і замінити дані, щоб зберігати json в БД
+ * @param {String}, {items} дані, що прийшли на аналіз
+ */
+const formatter = (items) => {
+    if(items == undefined) return items;
+    if(typeof(items) === 'number' ||  items instanceof Number){
+        return items
+    }
+    if(typeof(items) === 'string' || items instanceof String){
+        return items.replaceAll( /\"/ig, '&quot')
+    }else if(items instanceof Object){
+        const entries = Object.entries(items);
+        for (const [keys, value] of entries) {
+            items[keys] = formatter(value)
+        }
+    }
+    return items
+}
 
 /** Повертає результат виконання запиту в manticoreSearch 
  * @param {String},{Object}    param для підключення manticoreSearch, може бути посилання на клієнт або url
@@ -40,6 +57,7 @@ const execute = async (query, param) => {
 }
 
 const stringify = object => {
+    formatter(object)
     let result = JSON.stringify(object)
     result = result.replaceAll( /'/ig, "`")
     return result
@@ -50,5 +68,6 @@ const stringify = object => {
 module.exports = {
     getClient,
     execute,
-    stringify
+    stringify,
+    formatter
   };
