@@ -53,6 +53,41 @@ const update = async (query, param) =>{
         throw e
     } 
 }
+
+/** Повертає результат виконання запиту в manticoreSearch (deleteCall)
+ * @param {String},{Object}    param для підключення manticoreSearch, може бути посилання на клієнт або url
+ * @param {Object} query       SQL запит
+ * @return {Promise}
+ */
+const search = async (query, param) =>{
+    try{
+        const client = (isString(param)) ? getClient(param) : param
+        const indexApi = new Manticoresearch.IndexApi(client)
+        res = await indexApi.search(query);
+        const { ...content } = res
+        return content
+    } catch (e) { 
+        throw e
+    } 
+}
+
+/** Повертає результат виконання запиту в manticoreSearch (deleteCall)
+ * @param {String},{Object}    param для підключення manticoreSearch, може бути посилання на клієнт або url
+ * @param {Object} query       SQL запит
+ * @return {Promise}
+ */
+const deleteCall = async (query, param) =>{
+    try{
+        const client = (isString(param)) ? getClient(param) : param
+        const indexApi = new Manticoresearch.IndexApi(client)
+        res = await indexApi.callDelete(query);
+        const { ...content } = res
+        return content
+    } catch (e) { 
+        throw e
+    } 
+}
+
 /** Повертає результат виконання запиту в manticoreSearch (insert)
  * @param {String},{Object}    param для підключення manticoreSearch, може бути посилання на клієнт або url
  * @param {Object} query       SQL запит
@@ -76,7 +111,7 @@ const insert = async (query, param) =>{
  * @return {Promise}
  */
 
-const execute = async (query, param) => {
+const sqlQuery = async (query, param) => {
     try{
         const client = (isString(param)) ? getClient(param) : param
         const utilsApi = new Manticoresearch.UtilsApi(client)
@@ -96,12 +131,13 @@ const stringify = object => {
 }
 
 
-
 module.exports = {
     getClient,
-    execute,
     stringify,
     formatter,
+    sqlQuery,
     insert,
-    update
+    update,
+    search,
+    deleteCall
   };
